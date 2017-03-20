@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8">
+	<meta http-equiv="content-type" content="text/html" charset="windows-1252">
+	<meta http-equiv="X-UA-Compatible" content="IE=9">
+	<meta name="viewport" content="width=device-width; initial-scale=1"/>
+	<link rel="shortcut icon" href="images/favicon.ico"/>
+
+  	<link rel="stylesheet" type="text/css" href="../css/admin.css" />
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" />
+  	
+	<link rel="stylesheet" type="text/css" href="../css/stylesheet.css">
+	<script type="text/javascript" src="../js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="../js/bootstrap.js"></script>
+	
+	<title>
+		Upload | Hi-Learn.
+	</title>
+</head>
+<!-- Body -->
+<body>
+	
+ <h1><br> Upload File<br></h1>
+
+ <form action="../UploadMaterial" method="POST" enctype="multipart/form-data">
+<article>
+    <center>
+    <br>
+    <h2>select the file(s) to upload</h2>
+    <table>
+        <tbody>
+        <tr>
+        <td >
+            <input type="file" name="file" />
+        </td>
+            <td>
+                <input style="width: 200px; 
+                       border-width: 2px;" type="text"
+                       name="description" placeholder="caption file" />
+            </td>
+            <td>
+                <button class="btn btn-primary"><span class="glyphicon glyphicon-menu-down" ></span></button>
+            </td>
+        </tr>
+
+        <tr>
+
+            <td> 
+                <button type="submit"><span class="glyphicon glyphicon-upload"></span></button>
+            </td>
+            <td> 
+                <button type="submit" name="cancel" onclick="neverMind()" 
+                        style="background: red"> Cancel</button> 
+            </td>
+        </tr>
+        </tbody>
+        </table>
+       </center>
+   </article>
+ </form >
+
+
+</body>
+</html>
