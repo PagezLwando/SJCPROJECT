@@ -71,12 +71,12 @@ public class Teacher extends HttpServlet {
                     request.setAttribute("successMessage","teacher successfully Added");
                     //request.setAttribute("successMessage",stud);
                     
-                    RequestDispatcher rd = request.getRequestDispatcher("pages/admin.html");
+                    RequestDispatcher rd = request.getRequestDispatcher("pages/admin.jsp");
                     rd.forward(request,response);
                 }else{
                     errors.add("teacher not added");
                     request.setAttribute("errorsList",errors);
-                    RequestDispatcher rd= request.getRequestDispatcher("index.html");
+                    RequestDispatcher rd= request.getRequestDispatcher("index.jsp");
                     rd.forward(request,response);
                 }     
         }

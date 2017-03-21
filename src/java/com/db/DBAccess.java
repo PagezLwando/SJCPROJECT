@@ -1,8 +1,6 @@
 
 package com.db;
 
-
-
 import com.models.Upload;
 import com.models.AdminMaker;
 import com.models.Comments;
@@ -31,7 +29,7 @@ public DataSource getDataSource() throws Exception{
         throw new Exception("Uh No Context Found!");
     } 
     //JNDI name must match in context and web.xml file. Late
-    DataSource ds = (DataSource) cxt.lookup("java:comp/env/jdbc/InfiniteJoy");
+    DataSource ds = (DataSource) cxt.lookup("java:comp/env/jdbc/hilearn_db");
     if ( ds == null ) {
         throw new Exception("Data Source Not Found!");
     }
@@ -60,7 +58,8 @@ catch(Exception ex){
  * @param conn
  * @throws SQLException 
  */
-private void closeDBResources(ResultSet rst, Statement stmt, Connection conn) throws SQLException{
+private void closeDBResources(ResultSet rst, Statement stmt, Connection conn) 
+        throws SQLException{
     if (rst != null) {
       try { rst.close(); } catch (SQLException e) { ; }
       rst = null;
@@ -277,7 +276,7 @@ public boolean addStudent(StudentModel student) throws Exception{
         
         isAdded = status > 0;
         if(isAdded){
-            conn.commit(); //persisting data
+            conn.commit(); // persisting data
         }else{
             conn.rollback();
             System.out.println("Error occured while addig a studnet.");
@@ -291,8 +290,7 @@ public boolean addStudent(StudentModel student) throws Exception{
    return isAdded;
 }
 
-public boolean addTeacher(Register teacher) throws Exception
-    {
+public boolean addTeacher(Register teacher) throws Exception {
         java.sql.CallableStatement call = null;
         if(teacher.getStaff_num()== 0){
             throw new IllegalArgumentException("Enter valid staff number");
@@ -328,8 +326,7 @@ public boolean addTeacher(Register teacher) throws Exception
     
     return isInserted;
 }
-public boolean addSchoolAdmin(SchoolAdminModel school_admin) throws Exception
-    {
+public boolean addSchoolAdmin(SchoolAdminModel school_admin) throws Exception {
         java.sql.CallableStatement call = null;
         if(school_admin.getSchool_admin_num()== 0){
             throw new IllegalArgumentException("Enter valid school admin number");
@@ -366,8 +363,7 @@ public boolean addSchoolAdmin(SchoolAdminModel school_admin) throws Exception
     return isInserted;
 }
 
-public List loginCheck(String username, String password)throws Exception
-  {
+public List loginCheck(String username, String password)throws Exception {
       //String query;
       boolean login = false;
       Connection conn = null;
@@ -378,7 +374,7 @@ public List loginCheck(String username, String password)throws Exception
       try{
           
           conn=this.getConnection();
-          callStat = conn.prepareCall("{call getAdmin(?,?)}");
+          callStat = conn.prepareCall("{call login(?,?)}");
           callStat.setString(1, username);
           callStat.setString(2, password);
           
@@ -386,9 +382,9 @@ public List loginCheck(String username, String password)throws Exception
           while(rs.next()){
               login = true;
               AdminMaker admin = new AdminMaker();
-              System.out.println("USERNAME: " + admin.getUsername());
               adminList.add(rs.getString(1));
               adminList.add(rs.getString(2));
+              adminList.add(rs.getString(3));
        
             }
       }
@@ -401,7 +397,7 @@ public List loginCheck(String username, String password)throws Exception
 /**
  * Charts
  */
-public boolean postComment(Comments comment) throws Exception{
+public boolean postComment(Comments comment) throws Exception {
         CallableStatement call = null;
         if(comment.getExam_number() == null){
             throw new IllegalArgumentException("Enter valid staff number");
@@ -437,7 +433,7 @@ public boolean postComment(Comments comment) throws Exception{
      return isInserted;
        }
     
-    public List getAllChats()throws Exception{
+public List getAllChats() throws Exception {
         ArrayList<Comments> list = new  ArrayList<Comments>();
         CallableStatement call = null;
         ResultSet result = null;
@@ -465,7 +461,7 @@ public boolean postComment(Comments comment) throws Exception{
     return list;
     }
     
-        public boolean addFile(Upload upload) throws Exception{
+public boolean addFile(Upload upload) throws Exception {
         Connection conn=null;
         CallableStatement call=null;
         boolean isInserted=false;

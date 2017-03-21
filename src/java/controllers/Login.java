@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controllers;
 
 import com.db.DBAccess;
@@ -17,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * School Admin Login
@@ -25,64 +21,77 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "Login", urlPatterns = {"/Login"})
 public class Login extends HttpServlet {
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, Exception {
+  protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    throws ServletException, IOException, Exception {
         
-       String disp="login/login.jsp";
+    String disp="login/login.jsp";
        
-       String username=request.getParameter("username");
-       String password =request.getParameter("password");
-       String stand = request.getParameter("stand");
+    String username=request.getParameter("username");
+    String password =request.getParameter("password");
+    String stand = request.getParameter("stand");
        
-       ArrayList<String> errors = new ArrayList<String>();
+    ArrayList<String> errors = new ArrayList<String>();
        
-        if(username==null||username.trim().length()==0)
-            errors.add("Username not supplied");
-        if(password==null||password.trim().length()==0)
-            errors.add("Password not supplied");
+    if(username==null||username.trim().length()==0)
+      errors.add("Username not supplied");
+    if(password==null||password.trim().length()==0)
+      errors.add("Password not supplied");
+    
+    try {
+      
+      if(errors.isEmpty()) {
+              
+        DBAccess dao = new DBAccess();
+        List comeIn = dao.loginCheck(username, password);
+        System.out.println("ADMIN LIST: " + comeIn.toArray()[1]);
+           
+        if(comeIn.isEmpty()){
+          
+          errors.add("Your login details not on the system"
+            + " consult admin to add you to the database");
+          
+        } else {
+          
+          HttpSession session = request.getSession();
+          session.setAttribute("id", comeIn.toArray()[0]);
+          session.setAttribute("username", comeIn.toArray()[1]);
+          String pageTo = null;
+          if (comeIn.toArray()[2].toString().equalsIgnoreCase("STUDENT")) {  
             
-        try{
-            if(errors.isEmpty()){
-                DBAccess dao = new DBAccess();
-                List comeIn = dao.loginCheck(username, password);
-                System.out.println("ADMIN LIST: " + comeIn);
-                if(comeIn.isEmpty()){
-                    errors.add("Your login details not on the system"
-                            + " consult admin to add you to the database");
-                }
-                else{
-                    String pageTo = null;
-                    if(stand.equalsIgnoreCase("S")){   
-                        RequestDispatcher dir = request.getRequestDispatcher("pages/subjects.html");
-                        dir.forward(request, response);
-                    }
-                    else if(stand.equalsIgnoreCase("A")){
-                        
-                        pageTo = "pages/admin.html";
-                        response.setStatus(response.SC_MOVED_TEMPORARILY);
-                        response.setHeader("Location", pageTo);
-//                        RequestDispatcher dir = request.getRequestDispatcher("pages/admin.html");
-                        //dir.forward(request, response);
-                    }else if(stand.equalsIgnoreCase("T")){
-                       // RequestDispatcher dir=null;
-                       
-                         pageTo = "pages/teacher.html";
-                        response.setStatus(response.SC_MOVED_TEMPORARILY);
-                        response.setHeader("Location", pageTo);
-                                //public void HttpServletRespose.sendRedirect("pages/teacher.html") throws IOException;
-                        //dir.forward(request, response);
-                    }else 
-                        errors.add("Please tick relevant");
-                }
-                request.setAttribute("successMsg","You entered " + username + "  for a user name");  
-            } 
+            pageTo = "pages/subjects.jsp";
+            response.setStatus(response.SC_MOVED_TEMPORARILY);
+            response.setHeader("Location", pageTo);
+                      
+          } else if (comeIn.toArray()[2].toString().equalsIgnoreCase("SCHOOL_ADMIN")) {
+            
+            pageTo = "pages/admin.jsp";
+            response.setStatus(response.SC_MOVED_TEMPORARILY);
+            response.setHeader("Location", pageTo);
+                      
+          } else if (comeIn.toArray()[2].toString().equalsIgnoreCase("TEACHER")) {
+            
+            pageTo = "pages/uploader.jsp";
+            response.setStatus(response.SC_MOVED_TEMPORARILY);
+            response.setHeader("Location", pageTo);
+                    
+          } else 
+            errors.add("Please tick relevant");
+            
         }
-        catch(Exception exe){
-            exe.printStackTrace();
-            RequestDispatcher dir = request.getRequestDispatcher(disp);
-            dir.forward(request, response);
-        }
+        
+        request.setAttribute("successMsg","You entered " + username + "  for a user name");  
+        
+      } 
+      
+    } catch(Exception exe) {
+      
+      exe.printStackTrace();
+      RequestDispatcher dir = request.getRequestDispatcher(disp);
+      dir.forward(request, response);
+      
     }
+    
+  }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

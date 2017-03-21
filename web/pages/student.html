@@ -32,7 +32,7 @@
 	    </ul>
 	    <ul class="nav navbar-nav navbar-right">
                 <li class="navbar-right">
-	        <a href="login/login.jsp"><span class="glyphicon glyphicon-log-out"></span></a>
+	        <a href="../"><span class="glyphicon glyphicon-log-out"></span></a>
 	      </li>
 	      <li class="navbar-right">
 	        <a href="#"><span class="glyphicon ">?</span></a>
@@ -43,40 +43,66 @@
 
 	<!-- Teacher Registration -->
 	<div class="container">
-            <form method="POST" action="../Student" >
-			<p>
-			<label>Exam Number:</label>
-			<input type='text' onChange="" name="exam_number"
-				placeholder='211217328'/> </p>
-			<p>
-			<label>First Name:</label>
-			<input type='text' onChange="" name="fname"
-				placeholder='i.e. Terra'/> </p>
-			<p>
-			<label>Last Name:</label>
-                        <input type='text' onChange="" name="lname"
-				placeholder='i.e. Byte'/> </p>
-			<!--<p>
-			<label>Subject's:</label>
-			<input type='text' onChange="" name="subjects"
-				placeholder='Math'/> </p>-->
-			<p>
-                        <label>Email:</label>
-			<input type='email' onChange="" name="email"
-				placeholder='byte@terra.com'/> </p>
-			<p>
-                            <label>Grade:</label>
-			<input type='text' onChange="" name="grade"
-				placeholder='12'/> </p>
-                        <p>
-                            <label>Phone #:</label>
-			<input type='text' onChange="" name="phone"
-				placeholder='0785421365'/> </p>
-			<p>
-                         <label>School Admin:</label>
-			<input type='text' onChange="" name="school_admin"
-				placeholder='1212'/> </p>
-                        <input type="submit" name="submit" value="Submit" />
+    <form method="POST" action="../Student" >
+      <table>
+        <tr>
+          <td>
+            <label>Exam Number:</label>
+          </td>
+          <td>
+            <input type='text' onChange="" name="exam_number"	placeholder='211217328'/>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label>First Name:</label>
+          </td>
+          <td>
+            <input type='text' onChange="" name="fname" placeholder='Terra'/>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label>Last Name:</label>
+          </td>
+          <td>
+            <input type='text' onChange="" name="lname" placeholder='Byte'/>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label>Email:</label>
+          </td>
+          <td>
+            <input type='email' onChange="" name="email" placeholder='byte@terra.com'/>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label>Grade:</label>
+          </td>
+          <td>
+            <input type='text' onChange="" name="grade" placeholder='12'/>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label>Phone #:</label>
+          </td>
+          <td>
+            <input type='text' onChange="" name="phone" placeholder='0785421365'/>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label>School Admin:</label>
+          </td>
+          <td>
+            <input type='text' onChange="" name="school_admin" placeholder='1212'/>
+          </td>
+        </tr>
+      </table>
+      <input type="submit" name="submit" value="Submit" />
 		</form>
 	</div>
 <script type="text/javascript" src="../js/bootstrap.js"></script>

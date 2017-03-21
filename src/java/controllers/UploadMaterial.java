@@ -32,7 +32,7 @@ public class UploadMaterial extends HttpServlet {
 
     }
 
-    private final String UPLOAD_DIRECTORY = "C:\\apache-tomcat-7.0.37\\webapps\\docs\\uploads";
+    private final String UPLOAD_DIRECTORY = "C:\\apache-tomcat-7.0.37\\webapps\\docs\\hilearndocs";
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
@@ -67,7 +67,9 @@ public class UploadMaterial extends HttpServlet {
         }else{
             request.setAttribute("message", "Sorry this Servlet only handles file upload request");
         }
-        request.getRequestDispatcher("pages/loader.jsp").forward(request, response);
+//        request.getRequestDispatcher("pages/uploader.html").forward(request, response);
+        response.setStatus(response.SC_MOVED_TEMPORARILY);
+            response.setHeader("Location", "pages/uploader.jsp");
         }
 
     @Override

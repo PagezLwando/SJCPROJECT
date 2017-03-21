@@ -23,7 +23,7 @@
 	  <div class="container">
       <ul class="nav navbar-nav">
         <li class="navbar-left">
-          <h1><span>Hi-Learn</span></h1>
+          <h1><span class="header">Hi-Learn</span></h1>
         </li>
       </ul>
 	    <ul class="nav navbar-nav navbar-right">
@@ -79,9 +79,9 @@
     </div>
     </section>
   </main>
-        	<!-- footer here -->
-          <footer>
-            <p>Efinovation (Pty) Ltd.</p>
-          </footer>
-    </body>
+  <!-- footer here -->
+  <footer>
+    <p>Efinovation (Pty) Ltd.</p>
+  </footer>
+  </body>
 </html>

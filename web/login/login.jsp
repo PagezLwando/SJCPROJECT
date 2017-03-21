@@ -8,28 +8,27 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Login</title>
-    <script type="text/javascript" src="js/bootstrap.js"></script>
-    <link rel="stylesheet" type="text/css" href="css/main.css" />
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
-    <script type="text/javascript" src="../js/bootstrap.js"></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=9">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="stylesheet" type="text/css" href="../css/main.css" />
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" />
+    <script type="text/javascript" src="../js/bootstrap.js"></script>
+    <title>Hi-Login</title>
   </head>
   <body>
   <nav class="navbar navbar-default navbar-static-top navbar-inverse">
 	  <div class="container">
-      <ul class="nav navbar-nav navbar-right">
-	      <li>
-	        <a href="../index.jsp"><span class="glyphicon glyphicon-home"></span> </a>
-	      </li>
-	    </ul>
       <ul class="nav navbar-nav">
         <li>
-          <h1><span>Hi-Login</span></h1>
+          <h1><span class="header">Hi-Login</span></h1>
         </li>
       </ul>
+      <ul class="nav navbar-nav navbar-right">
+	      <li>
+	        <a href="../"><span class="glyphicon glyphicon-home"></span> </a>
+	      </li>
+	    </ul>
 	  </div>
 	</nav> <!-- End Nav Bar -->
     <header>
@@ -39,7 +38,7 @@
     </header>
     <article>
       <center>
-        <form method="POST" action="../" >
+        <form method="POST" action="../Login" >
           <table>
             <tr>
               <td>
@@ -63,13 +62,6 @@
             </tr>
             <tr>
               <td>
-                <input type="radio" name="stand" value="A"  />Admin
-                <input type="radio" name="stand" value="S" />Student
-                <input type="radio" name="stand" value="T" />Teacher
-              </td>
-            </tr>
-            <tr>
-              <td>
                 <input type="submit" value="Login" class="btn btn-primary"/>     
                 <input type="submit" value="Forgot Password?" class="btn btn-default"/>
               </td>
@@ -78,5 +70,9 @@
         </form>
       </center>
     </article>
+  <!-- footer here -->
+  <footer>
+    <p>Efinovation (Pty) Ltd.</p>
+  </footer>
   </body>
 </html>

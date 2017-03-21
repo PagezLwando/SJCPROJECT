@@ -1,9 +1,80 @@
 h1, h5{
     color: #845ac7;
-    text-align: center;
      text-align:center; 
      color:cyan; 
 }
+.header{
+    font-size: 40px;
+    color: #FFFFFF;
+    text-align: center;
+    padding-left: 158px;
+    border-radius: 0px;
+    border-color: #FFFFFF;
+}
+header img{
+    width: 90px;
+    height: 90px;
+}
+
+.post{
+    border-radius: 8px;
+    border-color: #FFFFFF;
+    padding: 10px;
+    margin: 10px;
+    background-color: white;
+    position: relative;
+    margin: 15px;
+    font-size: 25px;
+    -moz-box-shadow: 0px 0px 0px rgba(0, 0, 0,0);
+    -webkit-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+    padding: 10px;
+    background-size: 200%;
+    margin-top: 10px;
+    background-repeat: no-repeat;
+    width: auto;
+    height: auto;
+}
+
+.post-item{
+    border-radius: 8px;
+    border-color: #FFFFFF;
+    padding: 10px;
+    margin: 10px;
+    background-color: white;
+    position: relative;
+    margin: 15px;
+    font-size: 25px;
+    -moz-box-shadow: 0px 0px 0px rgba(0, 0, 0,0.5);
+    -webkit-box-shadow: 0px 0px 0px rgba(0, 0, 0, .5);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, .5);
+    padding: 10px;
+    background-size: 200%;
+    margin-top: 10px;
+    background-repeat: no-repeat;
+    width: auto;
+    height: auto;
+}
+
+.registration{
+    background-color: white;
+    position: relative;
+    margin: 15px;
+    font-size: 25px;
+    -moz-box-shadow: 1px 2px 4px rgba(0, 0, 0,0.5);
+    -webkit-box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
+    box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
+    padding: 10px;
+    border-radius: 5px;
+    height: auto;
+    background-size: 200%;
+    margin-top: 10px;
+    background-repeat: no-repeat;
+    width: auto;
+    height: auto;
+}
+
+/*
 article {
     float: center;
     
@@ -20,6 +91,11 @@ article input[type=password]{
     border-radius: 5px 5px 5px 5px;
     width: 200px;
     height: 30px;
+}
+
+.glyphicon {
+  width: 200px;
+  height: 200px;
 }
 
 .jumbotron {
@@ -56,23 +132,7 @@ article input[type=password]{
     border-color: #080808;
 }
 
-.registration{
-    background-color: white;
-    position: relative;
-    margin: 15px;
-    font-size: 25px;
-    -moz-box-shadow: 1px 2px 4px rgba(0, 0, 0,0.5);
-    -webkit-box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
-    box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
-    padding: 10px;
-    border-radius: 5px;
-    height: auto;
-    background-size: 200%;
-    margin-top: 10px;
-    background-repeat: no-repeat;
-    width: auto;
-    height: auto;
-}
+
 
 .Tech_registration{
     background-color: cyan;
@@ -91,14 +151,7 @@ article input[type=password]{
     height: 360px;
 }
 
-.header{
-    font-size: 40px;
-    color: #FFFFFF;
-    text-align: center;
-    padding-left: 158px;
-    border-radius: 0px;
-    border-color: #FFFFFF;
-}
+
 
 .time{
     float: right;
@@ -107,45 +160,9 @@ article input[type=password]{
     font-size: 10px;
 }
 
-.post-item{
-    border-radius: 8px;
-    border-color: #FFFFFF;
-    padding: 10px;
-    margin: 10px;
-    background-color: white;
-    position: relative;
-    margin: 15px;
-    font-size: 25px;
-    -moz-box-shadow: 0px 0px 0px rgba(0, 0, 0,0.5);
-    -webkit-box-shadow: 0px 0px 0px rgba(0, 0, 0, .5);
-    box-shadow: 0px 2px 2px rgba(0, 0, 0, .5);
-    padding: 10px;
-    background-size: 200%;
-    margin-top: 10px;
-    background-repeat: no-repeat;
-    width: auto;
-    height: auto;
-}
 
-.post{
-    border-radius: 8px;
-    border-color: #FFFFFF;
-    padding: 10px;
-    margin: 10px;
-    background-color: white;
-    position: relative;
-    margin: 15px;
-    font-size: 25px;
-    -moz-box-shadow: 0px 0px 0px rgba(0, 0, 0,0);
-    -webkit-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
-    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
-    padding: 10px;
-    background-size: 200%;
-    margin-top: 10px;
-    background-repeat: no-repeat;
-    width: auto;
-    height: auto;
-}
+
+
 
 .btn{
     display: inline-block;
@@ -186,11 +203,9 @@ article input[type=password]{
     margin: 15px;
     text-align: right;
     float: right;
-}
-header img{
-    width: 90px;
-    height: 90px;
-}
+}*/
+
+/*
 .addComment:hover{
     background-color: #6BCDFD;
 }
@@ -200,5 +215,9 @@ header img{
     font-family: sans-serif;
     float: center;
     padding: 180px;
-    
 }
+
+tr, td {
+  padding: 22px;
+  margin: 22px;
+}*/
