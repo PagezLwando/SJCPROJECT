@@ -23,16 +23,16 @@
 	  <div class="container">
 	    <ul class="nav navbar-nav">
 	      <li >
-	        <a href="../
-                   pages/subjects.html"><span class="glyphicon glyphicon-chevron-left"></span> </a>
+	        <a href="../pages/contents.jsp"><span class="glyphicon glyphicon-chevron-left"></span> </a>
 	      </li>
 	      <li>
-                  <span class="header"> Accounting<br /><span class="user">Yanga : 2121</span></span>
+                  <span class="header"> <%= request.getParameter("subject") %><br />
+                    <jsp:include page="../pages/username.jsp" />
 	      </li>
 	    </ul>
 	    <ul class="nav navbar-nav navbar-right">
                 <li class="navbar-right">
-	        <a href="login/login.jsp"><span class="glyphicon glyphicon-log-out"></span></a>
+	        <a href="../login/login.jsp"><span class="glyphicon glyphicon-log-out"></span></a>
 	      </li>
 	      <li class="navbar-right">
 	        <a href="#"><span class="glyphicon glyphicon-search"></span></a>
@@ -43,11 +43,10 @@
         <div class="panel panel-info">
             <div class="panel-heading">Post a Question</div>
             <div class="panel-body">
-                <form name="comment" action="../CommentsController" method="POST">
-                <textarea  name="post" id="comment" rows="5" cols="90">
+                <form action="../SubjectChat" method="POST">
+                <textarea name="comment" rows="5" cols="90">
                 </textarea>
-                
-                <br/><br/>
+                  <input type="hidden" name="subject" value="<%= request.getParameter("subject")%>" />
                 <input type="submit" value="Post" class="btn btn-info"/>
                 
             </form>

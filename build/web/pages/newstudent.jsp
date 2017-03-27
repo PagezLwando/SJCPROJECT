@@ -77,7 +77,15 @@
                 <label>Email:</label>
               </td>
               <td>
-                <input type='email' onChange="" name="email" placeholder='byte@terra.com'/>
+                <input type='email' name="email" placeholder='byte@terra.com'/>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label>Password:</label>
+              </td>
+              <td>
+                <input type='password' name="password" placeholder='****'/>
               </td>
             </tr>
             <tr>
@@ -94,14 +102,6 @@
               </td>
               <td>
                 <input type='text' onChange="" name="phone" placeholder='0785421365'/>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <label>School Admin:</label>
-              </td>
-              <td>
-                <input type='text' onChange="" name="school_admin" placeholder='1212'/>
               </td>
             </tr>
           </table>

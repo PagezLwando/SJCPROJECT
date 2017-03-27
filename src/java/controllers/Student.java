@@ -11,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Student Registration
@@ -20,14 +21,17 @@ public class Student extends HttpServlet {
 
   protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+    
+      HttpSession session = request.getSession();
       // getting student data
       String exam_number = request.getParameter("exam_number");
       String lname = request.getParameter("lname");
       String fname = request.getParameter("fname");
       String email = request.getParameter("email");
+      String password = request.getParameter("password");
       String grade = request.getParameter("grade");
       String phone = request.getParameter("phone");
-      String school_admin = request.getParameter("school_admin");
+      String school_admin = (String)session.getAttribute("id");
         
       // Error Mapping
       Map<String, String> error = new HashMap<String, String>();
@@ -47,6 +51,9 @@ public class Student extends HttpServlet {
       if(email == null && email.trim().length() == 0){
         error.put("email", "Email Required");
       }
+      if(password == null && password.trim().length() == 0){
+        error.put("password", "Password Required");
+      }
       if(grade == null && grade.trim().length() == 0){
         error.put("grade", "Grade Required");
       }
@@ -60,28 +67,27 @@ public class Student extends HttpServlet {
       if (error.isEmpty()) {
         try {
           // Call DAO to add the Student
-          int ex = Integer.parseInt(exam_number);
-          StudentModel stu = new StudentModel(ex, lname, fname,
-            email, grade, school_admin, phone);
+          StudentModel stu = new StudentModel(exam_number, lname, fname,
+            email, password, grade, school_admin, phone);
 
           // calling the student data access object
           DBAccess dbStudent = new DBAccess();
           boolean isAdded = dbStudent.addStudent(stu);
           if (isAdded) { //when a student is added successfully
             request.setAttribute("message", "Student Successfully Added");
-            RequestDispatcher dis = request.getRequestDispatcher("pages/admin.html");
-            dis.forward(request, response);
+            response.setStatus(response.SC_MOVED_TEMPORARILY);
+            response.setHeader("Location", "pages/admin.jsp");
           } else { // when student is not added
             request.setAttribute("message", "Student Not Successfully Added");
-            RequestDispatcher dis = request.getRequestDispatcher(dispatcher);
-            dis.forward(request, response);
+            response.setStatus(response.SC_MOVED_TEMPORARILY);
+            response.setHeader("Location", dispatcher);
           }            
         } catch (Exception exe) {
           request.setAttribute("student_error", "Student Not Adde (Servlet)");
         }
       } else {
-        RequestDispatcher dis = request.getRequestDispatcher(dispatcher);
-        dis.forward(request, response);
+        response.setStatus(response.SC_MOVED_TEMPORARILY);
+            response.setHeader("Location", dispatcher);
       } 
     }
 

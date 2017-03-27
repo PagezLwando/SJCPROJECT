@@ -49,27 +49,37 @@
 
 	<!-- Teacher Registration -->
 	<div class="registration">
-		<a href="../pages/teacher.jsp">
+		<a href="teacher.jsp">
 		<div class="row">
 			<div class="col-xs-4"><span class="glyphicon glyphicon-user"></span></div>
-			<div class="col-xs-4">Register a Teacher</div>
+			<div class="col-xs-4">Teacher</div>
 			<div class="col-xs-4"><span class="glyphicon glyphicon-chevron-right"></span></div>
 		</div>	
 		</a>		
 	</div>
 	<!-- Student Registration -->
 	<div class="registration">
-		<a href="../pages/student.jsp">
+		<a href="student.jsp">
 	 	<div class="row">
 			<div class="col-xs-4"><span class="glyphicon glyphicon-user"></span></div>
-			<div class="col-xs-4">Register a Student</div>
+			<div class="col-xs-4">Student</div>
 			<div class="col-xs-4"><span class="glyphicon glyphicon-chevron-right"></span></div>
 		</div>
 		</a>
 	</div>
   <!-- Add Subject to a School -->
   <div class="registration">
-		<a href="#">
+		<a href="newclass.jsp">
+	 	<div class="row">
+			<div class="col-xs-4"><span class="glyphicon glyphicon-blackboard"></span></div>
+			<div class="col-xs-4">Add Class</div>
+			<div class="col-xs-4"><span class="glyphicon glyphicon-chevron-right"></span></div>
+		</div>
+		</a>
+	</div>
+  <!-- Add Subject to a School -->
+  <div class="registration">
+		<a href="newsubject.jsp">
 	 	<div class="row">
 			<div class="col-xs-4"><span class="glyphicon glyphicon-book"></span></div>
 			<div class="col-xs-4">Add Subject</div>

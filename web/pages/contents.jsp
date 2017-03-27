@@ -25,10 +25,10 @@
 	  <div class="container">
 	    <ul class="nav navbar-nav">
 	      <li >
-	        <a href="#"><span class="glyphicon glyphicon-chevron-left"></span> </a>
+	        <a href="student_subjects.jsp"><span class="glyphicon glyphicon-chevron-left"></span> </a>
 	      </li>
 	      <li>
-	        <span class="header"> Subject Name</span>
+	        <span class="header"> <%= request.getParameter("subject") %></span>
 	      </li>
 	    </ul>
 	    <ul class="nav navbar-nav navbar-right">
@@ -88,7 +88,7 @@
 			</a>
 		</div>
 		<div class="row">
-			<a href="chatroom.jsp">
+      <a href="chatroom.jsp?subject=<%= request.getParameter("subject") %>">
 				<div class="col-xs-8 post-item">
 					<span class="glyphicon glyphicon-comment"></span>
 					<span>Peer Help</span><br />

@@ -47,7 +47,7 @@
     <center>
       <!-- Teacher Registration -->
       <div class="container">
-        <form onSubmit="" action="../Teacher" >
+        <form method="POST" action="../Teacher" >
           <table>
             <tr>
               <td>
@@ -79,6 +79,14 @@
               </td>
               <td>
                 <input type='text' onChange="" name="email" placeholder='tera@gmail.com'/>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label>Teacher:</label>
+              </td>
+              <td>
+                <input type='password' name="password" placeholder='******'/>
               </td>
             </tr>
             <tr>

@@ -47,7 +47,7 @@
     <center>
       <!-- Teacher Registration -->
       <a href="newteacher.jsp" class="btn btn-primary">New Teacher</a>
-      <a href="#" class="btn btn-primary">Assign Class</a>
+      <a href="class_teacher.jsp" class="btn btn-primary">Assign Class</a>
       <a href="#" class="btn btn-danger">Delete Teacher</a>
     </center>
   </main>

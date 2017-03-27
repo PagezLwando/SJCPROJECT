@@ -46,7 +46,7 @@
   <main>
     <center>
       <a href="newstudent.jsp" class="btn btn-primary">New Student</a>
-      <a href="#" class="btn btn-primary">Assign Subject</a>
+      <a href="student_subject.jsp" class="btn btn-primary">Assign Subject</a>
       <a href="#" class="btn btn-danger">Delete Student</a>
     </center>
   </main>

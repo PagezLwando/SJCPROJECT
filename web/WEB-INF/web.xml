@@ -28,6 +28,34 @@
         <servlet-name>Logout</servlet-name>
         <servlet-class>controllers.Logout</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Subject</servlet-name>
+        <servlet-class>controllers.Subject</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Student_Sub</servlet-name>
+        <servlet-class>controllers.Student_Sub</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Class_Teacher</servlet-name>
+        <servlet-class>controllers.Class_Teacher</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>School_Class</servlet-name>
+        <servlet-class>controllers.School_Class</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>getStudent_Subject</servlet-name>
+        <servlet-class>controllers.getStudent_Subject</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SubjectChat</servlet-name>
+        <servlet-class>controllers.SubjectChat</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>TopicComments</servlet-name>
+        <servlet-class>controllers.TopicComments</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Controller</servlet-name>
         <url-pattern>/Controller</url-pattern>
@@ -59,6 +87,34 @@
     <servlet-mapping>
         <servlet-name>Logout</servlet-name>
         <url-pattern>/Logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Subject</servlet-name>
+        <url-pattern>/Subject</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Student_Sub</servlet-name>
+        <url-pattern>/Student_Sub</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Class_Teacher</servlet-name>
+        <url-pattern>/Class_Teacher</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>School_Class</servlet-name>
+        <url-pattern>/School_Class</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>getStudent_Subject</servlet-name>
+        <url-pattern>/getStudent_Subject</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SubjectChat</servlet-name>
+        <url-pattern>/SubjectChat</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TopicComments</servlet-name>
+        <url-pattern>/TopicComments</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

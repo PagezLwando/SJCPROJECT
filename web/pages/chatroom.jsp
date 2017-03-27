@@ -4,6 +4,11 @@
     Author     : TerraByte
 --%>
 
+<%@page import="com.models.Comment"%>
+<%@page import="java.util.List"%>
+<%@page import="com.models.Chat"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.db.DBAccess"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -25,10 +30,10 @@
 	  <div class="container">
 	    <ul class="nav navbar-nav">
 	      <li >
-	        <a href="subjects.jsp"><span class="glyphicon glyphicon-chevron-left"></span> </a>
+	        <a href="contents.jsp?subject=<%= request.getParameter("subject") %>"><span class="glyphicon glyphicon-chevron-left"></span> </a>
 	      </li>
 	      <li>
-	        <span class="header">Hi-Peer Help</span>
+          <span class="header">Hi-Peer Help <%= request.getParameter("subject") %></span>
 	      </li>
 	    </ul>
 	    <ul class="nav navbar-nav navbar-right">
@@ -44,56 +49,60 @@
       <jsp:include page="username.jsp" />
 	  </div>
 	</nav> <!-- End Nav Bar -->
-
-	<!-- Teacher Registration -->
+       
+     <%
+    DBAccess db = new DBAccess();
+    List<Chat> subject_chat = (ArrayList)db.getSubjectChats((String)request.getParameter("subject"));
+      
+    if(!subject_chat.isEmpty()) {
+      for(int i = 0; i < subject_chat.size(); i++) {
+        System.out.println("topic " + subject_chat.get(i).getComment_posted());
+  %>
+  	<!--Subject Chat -->
+    
+    <!-- Teacher Registration -->
 	<div class="registration">
 		
 		<div class="row">
 			
-			<div class="col-xs-12">
+			<div class="col-xs-4">
 				<span class="glyphicon glyphicon-user"></span>
-				<span class="time">1:30pm</span>
-				<span>Please Help with HTML</span><br />
-				<span class="">Terra</span>
-
+				<span class=""><%= subject_chat.get(i).getStudent_exam_num() %>:</span>
+				<span class="text-info" style="font-size: 12px; text-align: right"><%= subject_chat.get(i).getTime_stamp() %></span><br/>
+				<span class="text-uppercase"><%= subject_chat.get(i).getComment_posted() %></span><br />
 			</div>
-		</div>
-		<div class="row">
-			<!-- Username -->
-			<div class="col-xs-6">
-			<a href="#" class="btn btn-info"><span>Help Peer</span></a> <!-- Reply with a Glyphicon -->
+      <!-- Help -->
+			<div class="col-xs-5">
+         <%
+          List<Comment> comment = (ArrayList)db.getComment(subject_chat.get(i).getComment_posted());
+         
+          if(!comment.isEmpty()) {
+            for(int j = 0; j < comment.size(); j++) {
+              System.out.println("Comment " + comment.get(j).getComment());
+        %>
+        <p class="text-lowercase"><%= comment.get(j).getComment() %> 
+          <span class="text-info" style="font-size: 16px">by <%= comment.get(j).getCommentor() %></span></p>
+        <%  
+            }
+          }
+          %>
 			</div>
-			<div  class="col-xs-6">
-				<span class="glyphicon glyphicon-comment text-info comment"></span> <!-- Number of comments for a comment -->
-			</div>
-		</div>	
-				
-	</div>
-	<div class="registration">
-		
-		<div class="row">
-			
-			<div class="col-xs-12">
-				<span class="glyphicon glyphicon-user"></span>
-				<span class="time">5:30am</span>
-				<span>What are Sequence Diagrams</span><br />
-				<span class="">Sipho</span>
-
-			</div>
-		</div>
-		<div class="row">
-			<!-- Username -->
-			<div class="col-xs-6">
-			<a href="#" class="btn btn-info"><span>Help Peer</span></a> <!-- Reply with a Glyphicon -->
-			</div>
-			<div  class="col-xs-6">
-				<span class="glyphicon glyphicon-comment text-info comment"><span class="badge">5</span> </span><!-- Number of comments for a comment -->
+			<!-- Help -->
+			<div class="col-xs-3">
+			<a href="../pages/topic_comment.jsp?subject=<%= request.getParameter("subject")%>
+         &topic= <%= subject_chat.get(i).getComment_posted()%>&topic_date= <%= subject_chat.get(i).getTime_stamp()%>" 
+         class="btn btn-info"><span>Help Peer</span></a> <!-- Reply with a Glyphicon -->
 			</div>
 		</div>		
 	</div>
-        <span class="addComment"><a href="../comments/commentList.jsp" class="btn glyphicon glyphicon-plus"></a></span>
-	
-	
+  <%
+      }
+    } else {
+      session.setAttribute("subject", "No Subjects");
+    }
+   %>	
+	<a href="../comments/commentList.jsp?subject=<%= request.getParameter("subject") %>"
+     class="btn btn-primary"><span class="btn glyphicon glyphicon-plus"></span></a>
 <script type="text/javascript" src="../js/bootstrap.js"></script>
 </body>
 </html>

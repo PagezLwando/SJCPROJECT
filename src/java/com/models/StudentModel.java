@@ -10,10 +10,22 @@ package com.models;
  * @author terra
  */
 public class StudentModel {
-    private int exam_number;
+    private String exam_number;
     private String last_name;
     private String first_name;
     private String email;
+    private String password;
+
+  public StudentModel(String exam_number, String last_name, String first_name, String email, String password, String grade, String school_admin, String phone) {
+    this.exam_number = exam_number;
+    this.last_name = last_name;
+    this.first_name = first_name;
+    this.email = email;
+    this.password = password;
+    this.grade = grade;
+    this.school_admin = school_admin;
+    this.phone = phone;
+  }
     private String grade;
     private String school_admin;
     private String phone;
@@ -21,7 +33,7 @@ public class StudentModel {
     public StudentModel() {
     }
 
-    public StudentModel(int exam_number, String last_name,
+    public StudentModel(String exam_number, String last_name,
             String first_name, String email, 
             String grade, String school_admin, String phone) {
         this.exam_number = exam_number;
@@ -41,11 +53,11 @@ public class StudentModel {
         this.first_name = first_name;
     }
 
-    public int getExam_number() {
+    public String getExam_number() {
         return exam_number;
     }
 
-    public void setExam_number(int exam_number) {
+    public void setExam_number(String exam_number) {
         this.exam_number = exam_number;
     }
 
@@ -60,13 +72,6 @@ public class StudentModel {
     @Override
     public String toString() {
         return "StudentModel{" + "exam_number=" + exam_number + ", last_name=" + last_name + ", first_name=" + first_name + '}';
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 11 * hash + this.exam_number;
-        return hash;
     }
 
     @Override
@@ -118,6 +123,14 @@ public class StudentModel {
     public void setPhone(String phone) {
         this.phone = phone;
     }
+
+  public String getPassword() {
+    return password;
+  }
+
+  public void setPassword(String password) {
+    this.password = password;
+  }
     
     
 }

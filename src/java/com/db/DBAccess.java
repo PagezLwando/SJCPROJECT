@@ -1,12 +1,18 @@
 
 package com.db;
 
+import com.models.AddSubject;
 import com.models.Upload;
 import com.models.AdminMaker;
+import com.models.Chat;
+import com.models.ClassTeacher;
+import com.models.Comment;
 import com.models.Comments;
 import com.models.Register;
 import com.models.SchoolAdminModel;
+import com.models.SchoolClass;
 import com.models.StudentModel;
+import com.models.Student_Subject;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -211,6 +217,34 @@ public List getSubject(String sub_name){
     }
     return subject;
 }
+
+public List getStudent_Subject(String exam_num){
+    Connection conn = null;
+    CallableStatement call = null;
+    ResultSet res = null;
+    List subject = new ArrayList();
+    
+    try{
+            
+        //getting connection
+        conn = this.getConnection();
+        //auto commint false
+//      conn.setAutoCommit(false);
+        //calling a stored procedure createComment
+        call = conn.prepareCall("{call getStudent_Subject(?)}");
+        //executing the procedure
+        call.setString(1, exam_num);
+        res = call.executeQuery();
+        while(res.next()){
+          System.out.println(res.getString(1));
+            subject.add(res.getString(1));
+         }
+    }catch(SQLException sqle){
+        System.out.println("Subject Not Found!");
+        sqle.printStackTrace();
+    }
+    return subject;
+}
 /**
  * 
  * @return a school admin
@@ -248,6 +282,149 @@ public List getSchoolAdmin(){
     }
     return school_admin;
 }
+
+public List<Chat> getSubjectChats(String subj_chat){
+    Connection conn = null;
+    CallableStatement call = null;
+    ResultSet res = null;
+    List subject_chat = new ArrayList();
+    
+    try{
+            
+        //getting connection
+        conn = this.getConnection();
+        //auto commint false
+//      conn.setAutoCommit(false);
+        //calling a stored procedure createComment
+        call = conn.prepareCall("{call getSubjectChats(?)}");
+        call.setString(1, subj_chat);
+        //executing the procedure
+        res = call.executeQuery();
+        while(res.next()) {
+          Chat chat = new Chat();
+          chat.setStudent_exam_num(res.getString(1));
+          chat.setComment_posted(res.getString(2));
+          chat.setTime_stamp(res.getTimestamp(3));
+          chat.setSubject(res.getString(4));
+          subject_chat.add(chat);
+            
+        }
+    }catch(SQLException sqle){
+        System.out.println("School Admin Not Found!");
+        sqle.printStackTrace();
+    }
+    return subject_chat;
+}
+
+public List<Comment> getComment(String topic){
+    Connection conn = null;
+    CallableStatement call = null;
+    ResultSet res = null;
+    List comments = new ArrayList();
+    
+    try{
+            
+        //getting connection
+        conn = this.getConnection();
+        //auto commint false
+//      conn.setAutoCommit(false);
+        //calling a stored procedure createComment
+        call = conn.prepareCall("{call getComments(?)}");
+        call.setString(1, topic);
+        //executing the procedure
+        res = call.executeQuery();
+        while(res.next()){
+            Comment comm = new Comment();
+            comm.setCommentor(res.getInt(1));
+            comm.setComment(res.getString(2));
+            comm.setComment_date(res.getTimestamp(3));
+            comments.add(comm);
+            
+         }
+    }catch(SQLException sqle){
+        System.out.println("School Admin Not Found!");
+        sqle.printStackTrace();
+    }
+    return comments;
+}
+
+public boolean addComment(Comment comment) throws Exception{
+   //to connect
+   Connection conn = null;
+   //to call stored statements
+   CallableStatement call = null;
+   boolean isAdded = false;
+   
+   try{
+   
+        //connecting to db
+        conn = this.getConnection();
+        //auto commit false
+        conn.setAutoCommit(false);
+        //calling stored statements
+        call = conn.prepareCall("{call addComment(?, ?, ?, ?)}");
+        //setting the parameters
+        call.setString(1, comment.getTopic());
+        call.setString(2, comment.getTopic_date());
+        call.setInt(3, comment.getCommentor());
+        call.setString(4, comment.getComment());
+        //ex
+        int status = call.executeUpdate();
+        
+        isAdded = status > 0;
+        if(isAdded){
+            conn.commit(); // persisting data
+        }else{
+            conn.rollback();
+            System.out.println("Error occured while addig a studnet.");
+        }
+        
+   }catch(Exception exe){
+       System.err.println("Error While Adding Student");
+       exe.printStackTrace();
+   }
+   
+   return isAdded;
+}
+
+public boolean addSubjectChat(Chat subj_chat) throws Exception{
+   //to connect
+   Connection conn = null;
+   //to call stored statements
+   CallableStatement call = null;
+   boolean isAdded = false;
+   
+   try{
+   
+        //connecting to db
+        conn = this.getConnection();
+        //auto commit false
+        conn.setAutoCommit(false);
+        //calling stored statements
+        call = conn.prepareCall("{call addChat(?, ?, ?)}");
+        //setting the parameters
+        call.setString(1, subj_chat.getStudent_exam_num());
+        call.setString(2, subj_chat.getComment_posted());
+        call.setString(3, subj_chat.getSubject());
+        //ex
+        int status = call.executeUpdate();
+        
+        isAdded = status > 0;
+        if(isAdded){
+            conn.commit(); // persisting data
+        }else{
+            conn.rollback();
+            System.out.println("Error occured while addig a studnet.");
+        }
+        
+   }catch(Exception exe){
+       System.err.println("Error While Adding Student");
+       exe.printStackTrace();
+   }
+   
+   return isAdded;
+}
+
 public boolean addStudent(StudentModel student) throws Exception{
    //to connect
    Connection conn = null;
@@ -262,15 +439,16 @@ public boolean addStudent(StudentModel student) throws Exception{
         //auto commit false
         conn.setAutoCommit(false);
         //calling stored statements
-        call = conn.prepareCall("{call addStudent(?, ?, ?, ?, ?, ?, ?)}");
+        call = conn.prepareCall("{call addStudent(?, ?, ?, ?, ?, ?, ?, ?)}");
         //setting the parameters
-        call.setInt(1, student.getExam_number());
+        call.setString(1, student.getExam_number());
         call.setString(2, student.getLast_name());
         call.setString(3, student.getFirst_name());
         call.setString(4, student.getGrade());
         call.setString(5, student.getEmail());
-        call.setString(6, student.getPhone());
-        call.setString(7, student.getSchool_admin());
+        call.setString(6, student.getPassword());
+        call.setString(7, student.getPhone());
+        call.setString(8, student.getSchool_admin());
         //ex
         int status = call.executeUpdate();
         
@@ -292,7 +470,7 @@ public boolean addStudent(StudentModel student) throws Exception{
 
 public boolean addTeacher(Register teacher) throws Exception {
         java.sql.CallableStatement call = null;
-        if(teacher.getStaff_num()== 0){
+        if(teacher.getStaff_num()== null){
             throw new IllegalArgumentException("Enter valid staff number");
         }
         boolean isInserted=false;
@@ -302,14 +480,15 @@ public boolean addTeacher(Register teacher) throws Exception {
         try {
                 conn = this.getConnection();
                 conn.setAutoCommit(false);
-                call = conn.prepareCall("{call addTeacher(?,?,?,?,?,?)}");
+                call = conn.prepareCall("{call addTeacher(?,?,?,?,?,?,?)}");
                    
-                call.setInt(1, teacher.getStaff_num());
+                call.setString(1, teacher.getStaff_num());
                 call.setString(2, teacher.getLastname());
                 call.setString(3,teacher.getFirst_name());
                 call.setString(4, teacher.getEmail_address());
-                call.setString(5, teacher.getCell_number());
-                call.setInt(6, teacher.getSchool_number());
+                call.setString(5, teacher.getPassword());
+                call.setString(6, teacher.getCell_number());
+                call.setString(7, teacher.getSchool_admin());
                   
                       //check execution status
              
@@ -362,6 +541,7 @@ public boolean addSchoolAdmin(SchoolAdminModel school_admin) throws Exception {
     
     return isInserted;
 }
+
 
 public List loginCheck(String username, String password)throws Exception {
       //String query;
@@ -490,4 +670,155 @@ public boolean addFile(Upload upload) throws Exception {
         }
         return isInserted;
     }
+
+public boolean addSubject(AddSubject subject) throws Exception{
+   //to connect
+   Connection conn = null;
+   //to call stored statements
+   CallableStatement call = null;
+   boolean isAdded = false;
+   
+   try{
+   
+        //connecting to db
+        conn = this.getConnection();
+        //auto commit false
+        conn.setAutoCommit(false);
+        //calling stored statements
+        call = conn.prepareCall("{call addSubject(?, ?, ?, ?, ?)}");
+        //setting the parameters
+        call.setString(1, subject.getSub_name());
+        call.setString(2, subject.getSub_description());
+        call.setString(3, subject.getSub_outline());
+        call.setString(4, subject.getSub_teacher());
+        call.setString(5, subject.getSchool_admin());
+        //ex
+        int status = call.executeUpdate();
+        
+        isAdded = status > 0;
+        if(isAdded){
+            conn.commit(); // persisting data
+        }else{
+            conn.rollback();
+            System.out.println("Error occured while addig a studnet.");
+        }
+        
+   }catch(Exception exe){
+       System.err.println("Error While Adding Student");
+       exe.printStackTrace();
+   }
+   
+   return isAdded;
+}
+
+public boolean addStudent_Subject(Student_Subject stud_subj) throws Exception{
+   //to connect
+   Connection conn = null;
+   //to call stored statements
+   CallableStatement call = null;
+   boolean isAdded = false;
+   
+   try{
+   
+        //connecting to db
+        conn = this.getConnection();
+        //auto commit false
+        conn.setAutoCommit(false);
+        //calling stored statements
+        call = conn.prepareCall("{call addStudent_Subject(?, ?)}");
+        //setting the parameters
+        call.setString(1, stud_subj.getStudent_exam_num());
+        call.setString(2, stud_subj.getSubject_name());
+        //ex
+        int status = call.executeUpdate();
+        
+        isAdded = status > 0;
+        if(isAdded){
+            conn.commit(); // persisting data
+        }else{
+            conn.rollback();
+            System.out.println("Error occured while addig a studnet.");
+        }
+        
+   }catch(Exception exe){
+       System.err.println("Error While Adding Student");
+       exe.printStackTrace();
+   }
+   
+   return isAdded;
+}
+public boolean addClass_Teacher(ClassTeacher class_teacher) throws Exception{
+   //to connect
+   Connection conn = null;
+   //to call stored statements
+   CallableStatement call = null;
+   boolean isAdded = false;
+   
+   try{
+   
+        //connecting to db
+        conn = this.getConnection();
+        //auto commit false
+        conn.setAutoCommit(false);
+        //calling stored statements
+        call = conn.prepareCall("{call addClass_Teacher(?, ?)}");
+        //setting the parameters
+        call.setString(1, class_teacher.getStaff_num());
+        call.setString(2, class_teacher.getClass_name());
+        //ex
+        int status = call.executeUpdate();
+        
+        isAdded = status > 0;
+        if(isAdded){
+            conn.commit(); // persisting data
+        }else{
+            conn.rollback();
+            System.out.println("Error occured while addig a studnet.");
+        }
+        
+   }catch(Exception exe){
+       System.err.println("Error While Adding Student");
+       exe.printStackTrace();
+   }
+   
+   return isAdded;
+}
+
+public boolean addClass(SchoolClass new_class) throws Exception {
+   //to connect
+   Connection conn = null;
+   //to call stored statements
+   CallableStatement call = null;
+   boolean isAdded = false;
+   
+   try{
+   
+        //connecting to db
+        conn = this.getConnection();
+        //auto commit false
+        conn.setAutoCommit(false);
+        //calling stored statements
+        call = conn.prepareCall("{call addClass(?, ?, ?)}");
+        //setting the parameters
+        call.setString(1, new_class.getClass_name());
+        call.setString(2, new_class.getNumber_of_students());
+        call.setString(3, new_class.getNumber_of_teachers());
+        //ex
+        int status = call.executeUpdate();
+        
+        isAdded = status > 0;
+        if(isAdded){
+            conn.commit(); // persisting data
+        }else{
+            conn.rollback();
+            System.out.println("Error occured while addig a studnet.");
+        }
+        
+   }catch(Exception exe){
+       System.err.println("Error While Adding Student");
+       exe.printStackTrace();
+   }
+   
+   return isAdded;
+}
 }

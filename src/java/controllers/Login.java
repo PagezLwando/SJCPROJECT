@@ -58,7 +58,7 @@ public class Login extends HttpServlet {
           String pageTo = null;
           if (comeIn.toArray()[2].toString().equalsIgnoreCase("STUDENT")) {  
             
-            pageTo = "pages/subjects.jsp";
+            pageTo = "pages/student_subjects.jsp";
             response.setStatus(response.SC_MOVED_TEMPORARILY);
             response.setHeader("Location", pageTo);
                       

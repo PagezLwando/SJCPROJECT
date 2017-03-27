@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -30,13 +31,16 @@ public class Teacher extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+      
+        HttpSession session = request.getSession();
+        
         String staff_num = request.getParameter("staff_number");
         String name = request.getParameter("first_name");
         String surname =request.getParameter("last_name");
         String email =request.getParameter("email");
+        String password =request.getParameter("password");
         String cell_number = request.getParameter("cell_number");
-        int staff_number=0;
-        int admin_number =123;
+        String admin_number = (String)session.getAttribute("id");
             //converting parameter
             
             
@@ -51,18 +55,19 @@ public class Teacher extends HttpServlet {
         if (email == null && email.length()== 0){
             errors.add("provide email");
         }
+        if (password == null && password.length()== 0){
+            errors.add("provide password");
+        }
         if (cell_number == null && cell_number.trim().length()== 0){
             errors.add("provide cell number");
         }
         if(staff_num == null && staff_num.trim().length()==0)
             errors.add("provide correct Staff_num");
-        else
-            staff_number = Integer.parseInt(staff_num);
                     
         try  {
            
-                Register regist = new Register(staff_number,surname,
-                        name,email,cell_number,admin_number);
+                Register regist = new Register(staff_num,surname,
+                        name,email, password, cell_number,admin_number);
                 DBAccess dao = new DBAccess();
                 boolean isAdded = dao.addTeacher(regist);
                 //checked if addition was successful
@@ -71,13 +76,13 @@ public class Teacher extends HttpServlet {
                     request.setAttribute("successMessage","teacher successfully Added");
                     //request.setAttribute("successMessage",stud);
                     
-                    RequestDispatcher rd = request.getRequestDispatcher("pages/admin.jsp");
-                    rd.forward(request,response);
+                    response.setStatus(response.SC_MOVED_TEMPORARILY);
+                    response.setHeader("Location", "pages/admin.jsp");
                 }else{
                     errors.add("teacher not added");
                     request.setAttribute("errorsList",errors);
-                    RequestDispatcher rd= request.getRequestDispatcher("index.jsp");
-                    rd.forward(request,response);
+                    response.setStatus(response.SC_MOVED_TEMPORARILY);
+                    response.setHeader("Location", "pages/admin.jsp");
                 }     
         }
         catch(Exception e){

@@ -24,7 +24,7 @@ public class Controller extends HttpServlet {
             throws ServletException, IOException {
         try{
             DBAccess db = new DBAccess();
-            Register teacher = new Register(1234, "terra", "byte", "simt@gmail.com", "0752145698", 123);
+            Register teacher = new Register("1234", "terra", "byte", "simt@gmail.com","123", "0752145698", "123");
             if(db.addTeacher(teacher)){
                 System.out.println("Teacher Added");
             }else{

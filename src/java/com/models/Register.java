@@ -10,33 +10,44 @@ package com.models;
  * @author aviwe08
  */
 public class Register {
-    private int staff_num;
+    private String staff_num;
     private String lastname;
     private String first_name;
     private String email_address;
-    private String cell_number;
-    private int school_number;
+    private String password;
 
-    public Register(int staff_num, String lastname,
+  public Register(String staff_num, String lastname, String first_name, String email_address, String password, String cell_number, String school_admin) {
+    this.staff_num = staff_num;
+    this.lastname = lastname;
+    this.first_name = first_name;
+    this.email_address = email_address;
+    this.password = password;
+    this.cell_number = cell_number;
+    this.school_admin = school_admin;
+  }
+    private String cell_number;
+    private String school_admin;
+
+    public Register(String staff_num, String lastname,
             String first_name, String email_address, 
-            String cell_number, int school_number) {
+            String cell_number, String school_number) {
         this.staff_num = staff_num;
         this.lastname = lastname;
         this.first_name = first_name;
         this.email_address = email_address;
         this.cell_number = cell_number;
-        this.school_number = school_number;
+        this.school_admin = school_number;
     }
 
     public Register() {
     }
     
 
-    public int getStaff_num() {
+    public String getStaff_num() {
         return staff_num;
     }
 
-    public void setStaff_num(int staff_num) {
+    public void setStaff_num(String staff_num) {
         this.staff_num = staff_num;
     }
 
@@ -72,13 +83,21 @@ public class Register {
         this.cell_number = cell_number;
     }
 
-    public int getSchool_number() {
-        return school_number;
+    public String getSchool_admin() {
+        return school_admin;
     }
 
-    public void setSchool_number(int school_number) {
-        this.school_number = school_number;
+    public void setSchool_admin(String school_admin) {
+        this.school_admin = school_admin;
     }
+
+  public String getPassword() {
+    return password;
+  }
+
+  public void setPassword(String password) {
+    this.password = password;
+  }
  
         
     
