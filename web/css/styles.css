@@ -1,0 +1,89 @@
+/*****************************************************************
+************************                  ************************
+************************      Begin Css   ************************
+************************                  ************************
+*****************************************************************/
+html{
+	background-color: #6495ED;
+	border:3px solid #003355;
+}
+body{
+	background-color: #6495ED;
+	border:3px solid #003355;
+}
+ .div{
+ 	text-align: right;
+ }
+ .active{
+ 	background-color: black;
+ 	color: white;
+ }
+ .uploadTF{
+     border: 2px solid yellow;
+     border-radius: 5px 5px 5px 5px;
+ }
+h1{
+	font-size: 37px;
+	background-color: #003344;
+	padding: 0px 0px 0px 0px;
+  text-shadow: 2px 2px 4px #000000;
+}
+
+h2{
+	border: 5px solid #003344;
+	background-color: #006699;
+	text-align: center;
+	text-decoration:underline;
+}
+h3{
+	color: steelblue;
+
+}
+h4{
+	background-color: #006666;
+	text-decoration:underline;
+	border: 2px solid #003344;
+	color: white;
+	text-align: center;
+}
+
+a:hover{
+	background-color: black;
+	color: white;
+	text-decoration: italic;
+}
+li{
+	text-decoration: none;
+	float: left;
+}
+li a {
+	display: block;
+    color: white;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+a:hover {
+	text-decoration: none;
+    background-color: black;
+    color:white;
+	font-style: italic;
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color:#5F9EA0;
+}
+.footer{
+  background-color: #003344;
+  color: white;
+}
+
+/*****************************************************************
+*****************                *********************************
+*****************   End of Css   *********************************
+*****************                ********************************* 
+******************************************************************/
